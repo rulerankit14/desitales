@@ -28,6 +28,11 @@ function Index() {
 
   const name = data?.app_name ?? "Vibe Call";
   const [first, ...rest] = name.split(" ");
+  const featureTexts = [
+    data?.feature_1 ?? "Instant HD video connection",
+    data?.feature_2 ?? "Private & secure calls",
+    data?.feature_3 ?? "100% free – no hidden charges",
+  ];
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">

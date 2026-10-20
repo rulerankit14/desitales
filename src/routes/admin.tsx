@@ -136,6 +136,10 @@ function Dashboard({ session }: { session: Session }) {
         <p className="text-sm text-muted-foreground">Signed in as {session.user.email} ({roles.join(", ")})</p>
         {field("app_name", "App name")}
         {field("tagline", "Tagline")}
+        {field("badge_text", "Badge text (e.g. FREE VIDEO CALLS)")}
+        {field("feature_1", "Feature line 1")}
+        {field("feature_2", "Feature line 2")}
+        {field("feature_3", "Feature line 3")}
         {field("version", "Version")}
         {field("min_android", "Android requirement")}
         <label className="block space-y-1">
