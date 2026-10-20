@@ -192,3 +192,56 @@ function Dashboard({ session }: { session: Session }) {
     </div>
   );
 }
+
+function VisitStats() {
+  const { data } = useQuery({
+    queryKey: ["visit_stats"],
+    refetchInterval: 30000,
+    queryFn: async () => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      const month = new Date(today);
+      month.setDate(month.getDate() - 30);
+
+      const count = async (gte?: Date, lt?: Date) => {
+        let q = supabase.from("page_visits").select("id", { count: "exact", head: true });
+        if (gte) q = q.gte("visited_at", gte.toISOString());
+        if (lt) q = q.lt("visited_at", lt.toISOString());
+        const { count: c } = await q;
+        return c ?? 0;
+      };
+
+      const [todayCount, yesterdayCount, monthCount, allTime] = await Promise.all([
+        count(today),
+        count(yesterday, today),
+        count(month),
+        count(),
+      ]);
+      return { todayCount, yesterdayCount, monthCount, allTime };
+    },
+  });
+
+  const stats = [
+    { label: "Today", value: data?.todayCount },
+    { label: "Yesterday", value: data?.yesterdayCount },
+    { label: "Last 30 days", value: data?.monthCount },
+    { label: "All time", value: data?.allTime },
+  ];
+
+  return (
+    <section className="rounded-3xl border bg-card p-6">
+      <h2 className="mb-4 font-semibold">Website visits</h2>
+      <div className="grid grid-cols-2 gap-3">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-2xl border bg-secondary/60 px-4 py-3 text-center">
+            <p className="text-2xl font-extrabold text-gradient">{s.value ?? "…"}</p>
+            <p className="text-sm text-muted-foreground">{s.label}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-xs text-muted-foreground">Updates automatically every 30 seconds.</p>
+    </section>
+  );
+}
