@@ -32,6 +32,7 @@ function Index() {
     data?.feature_2 ?? "Private & secure calls",
     data?.feature_3 ?? "100% free – no hidden charges",
   ];
+  const featureIconKeys = [data?.icon_1 ?? "zap", data?.icon_2 ?? "shield", data?.icon_3 ?? "users"];
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
