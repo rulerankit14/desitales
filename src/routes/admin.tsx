@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { FEATURE_ICONS, getFeatureIcon } from "@/lib/feature-icons";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -72,7 +73,7 @@ function Login() {
   );
 }
 
-type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string; badge_text: string; feature_1: string; feature_2: string; feature_3: string };
+type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string; badge_text: string; feature_1: string; feature_2: string; feature_3: string; icon_1: string; icon_2: string; icon_3: string };
 
 function Dashboard({ session }: { session: Session }) {
   const [roles, setRoles] = useState<string[] | null>(null);
