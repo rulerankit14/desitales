@@ -15,11 +15,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const features = [
-  { icon: Zap, text: "Instant HD video connection" },
-  { icon: ShieldCheck, text: "Private & secure calls" },
-  { icon: Users, text: "100% free – no hidden charges" },
-];
+const featureIcons = [Zap, ShieldCheck, Users];
 
 function Index() {
   const { data } = useQuery({

@@ -72,7 +72,7 @@ function Login() {
   );
 }
 
-type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string };
+type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string; badge_text: string; feature_1: string; feature_2: string; feature_3: string };
 
 function Dashboard({ session }: { session: Session }) {
   const [roles, setRoles] = useState<string[] | null>(null);
