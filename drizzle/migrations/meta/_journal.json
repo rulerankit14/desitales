@@ -8,6 +8,13 @@
       "when": 1792476474710,
       "tag": "0000_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792478467994,
+      "tag": "0001_add_editable_landing_texts",
+      "breakpoints": true
     }
   ]
 }

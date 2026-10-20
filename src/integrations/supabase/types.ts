@@ -18,6 +18,10 @@ export type Database = {
         Row: {
           apk_url: string | null
           app_name: string
+          badge_text: string
+          feature_1: string
+          feature_2: string
+          feature_3: string
           id: number
           min_android: string
           tagline: string
@@ -27,6 +31,10 @@ export type Database = {
         Insert: {
           apk_url?: string | null
           app_name?: string
+          badge_text?: string
+          feature_1?: string
+          feature_2?: string
+          feature_3?: string
           id?: number
           min_android?: string
           tagline?: string
@@ -36,6 +44,10 @@ export type Database = {
         Update: {
           apk_url?: string | null
           app_name?: string
+          badge_text?: string
+          feature_1?: string
+          feature_2?: string
+          feature_3?: string
           id?: number
           min_android?: string
           tagline?: string
