@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   useEffect(() => {
-    void supabase.from("page_visits").insert({ path: window.location.pathname });
+    supabase.from("page_visits").insert({ path: window.location.pathname }).then(() => {});
   }, []);
 
   const { data } = useQuery({
