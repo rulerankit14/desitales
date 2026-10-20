@@ -165,9 +165,9 @@ function Dashboard({ session }: { session: Session }) {
         {field("app_name", "App name")}
         {field("tagline", "Tagline")}
         {field("badge_text", "Badge text (e.g. FREE VIDEO CALLS)")}
-        {field("feature_1", "Feature line 1")}
-        {field("feature_2", "Feature line 2")}
-        {field("feature_3", "Feature line 3")}
+        {featureField(1)}
+        {featureField(2)}
+        {featureField(3)}
         {field("version", "Version")}
         {field("min_android", "Android requirement")}
         <label className="block space-y-1">
