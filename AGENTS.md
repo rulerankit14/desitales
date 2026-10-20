@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- App download settings live in one app_settings row; only owner/admin roles (user_roles table, is_staff()) may edit it or upload to the private apks bucket — RLS enforces this, the /admin page only gates UI.
