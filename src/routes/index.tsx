@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Video, Download, Zap, ShieldCheck, Users } from "lucide-react";
+import { Video, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getFeatureIcon } from "@/lib/feature-icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,8 +15,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const featureIcons = [Zap, ShieldCheck, Users];
 
 function Index() {
   const { data } = useQuery({
@@ -33,6 +32,7 @@ function Index() {
     data?.feature_2 ?? "Private & secure calls",
     data?.feature_3 ?? "100% free – no hidden charges",
   ];
+  const featureIconKeys = [data?.icon_1 ?? "zap", data?.icon_2 ?? "shield", data?.icon_3 ?? "users"];
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
@@ -53,7 +53,7 @@ function Index() {
 
         <ul className="mt-8 space-y-3 text-left">
           {featureTexts.map((text, i) => {
-            const Icon = featureIcons[i] ?? Zap;
+            const Icon = getFeatureIcon(featureIconKeys[i]);
             return (
               <li key={i} className="flex items-center gap-3 rounded-2xl border bg-secondary/60 px-4 py-3">
                 <Icon className="h-5 w-5 text-primary" />

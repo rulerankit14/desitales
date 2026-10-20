@@ -1,0 +1,4 @@
+ALTER TABLE public.app_settings
+  ADD COLUMN icon_1 TEXT NOT NULL DEFAULT 'zap',
+  ADD COLUMN icon_2 TEXT NOT NULL DEFAULT 'shield',
+  ADD COLUMN icon_3 TEXT NOT NULL DEFAULT 'users';

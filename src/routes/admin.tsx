@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { FEATURE_ICONS, getFeatureIcon } from "@/lib/feature-icons";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -72,7 +73,7 @@ function Login() {
   );
 }
 
-type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string; badge_text: string; feature_1: string; feature_2: string; feature_3: string };
+type Settings = { app_name: string; tagline: string; apk_url: string | null; version: string; min_android: string; badge_text: string; feature_1: string; feature_2: string; feature_3: string; icon_1: string; icon_2: string; icon_3: string };
 
 function Dashboard({ session }: { session: Session }) {
   const [roles, setRoles] = useState<string[] | null>(null);
@@ -130,6 +131,33 @@ function Dashboard({ session }: { session: Session }) {
     </label>
   );
 
+  const featureField = (n: 1 | 2 | 3) => {
+    const textKey = `feature_${n}` as keyof Settings;
+    const iconKey = `icon_${n}` as keyof Settings;
+    const Preview = getFeatureIcon(s[iconKey]);
+    return (
+      <div className="space-y-1">
+        <span className="text-sm text-muted-foreground">Feature line {n}</span>
+        <div className="flex items-center gap-2">
+          <select
+            className={`${input} w-auto`}
+            value={s[iconKey] ?? "zap"}
+            onChange={(e) => setS({ ...s, [iconKey]: e.target.value })}
+            aria-label={`Icon for feature line ${n}`}
+          >
+            {FEATURE_ICONS.map(({ key, label }) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border bg-secondary">
+            <Preview className="h-5 w-5 text-primary" />
+          </span>
+          <input className={input} value={s[textKey] ?? ""} onChange={(e) => setS({ ...s, [textKey]: e.target.value })} />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6">
       <form onSubmit={save} className="space-y-4 rounded-3xl border bg-card p-6">
@@ -137,9 +165,9 @@ function Dashboard({ session }: { session: Session }) {
         {field("app_name", "App name")}
         {field("tagline", "Tagline")}
         {field("badge_text", "Badge text (e.g. FREE VIDEO CALLS)")}
-        {field("feature_1", "Feature line 1")}
-        {field("feature_2", "Feature line 2")}
-        {field("feature_3", "Feature line 3")}
+        {featureField(1)}
+        {featureField(2)}
+        {featureField(3)}
         {field("version", "Version")}
         {field("min_android", "Android requirement")}
         <label className="block space-y-1">
