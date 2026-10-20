@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import { useQuery } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { FEATURE_ICONS, getFeatureIcon } from "@/lib/feature-icons";
@@ -160,6 +161,7 @@ function Dashboard({ session }: { session: Session }) {
 
   return (
     <div className="space-y-6">
+      <VisitStats />
       <form onSubmit={save} className="space-y-4 rounded-3xl border bg-card p-6">
         <p className="text-sm text-muted-foreground">Signed in as {session.user.email} ({roles.join(", ")})</p>
         {field("app_name", "App name")}
