@@ -22,6 +22,13 @@
       "when": 1792478607662,
       "tag": "0002_add_feature_icons",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792479196944,
+      "tag": "0003_create_page_visits",
+      "breakpoints": true
     }
   ]
 }

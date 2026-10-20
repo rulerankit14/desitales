@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Video, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,6 +18,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  useEffect(() => {
+    void supabase.from("page_visits").insert({ path: window.location.pathname });
+  }, []);
+
   const { data } = useQuery({
     queryKey: ["app_settings"],
     queryFn: async () => {

@@ -65,6 +65,24 @@ export type Database = {
         }
         Relationships: []
       }
+      page_visits: {
+        Row: {
+          id: number
+          path: string
+          visited_at: string
+        }
+        Insert: {
+          id?: never
+          path?: string
+          visited_at?: string
+        }
+        Update: {
+          id?: never
+          path?: string
+          visited_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
