@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Video, Download, Zap, ShieldCheck, Users } from "lucide-react";
+import { Video, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getFeatureIcon } from "@/lib/feature-icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,8 +15,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const featureIcons = [Zap, ShieldCheck, Users];
 
 function Index() {
   const { data } = useQuery({
