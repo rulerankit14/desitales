@@ -131,6 +131,33 @@ function Dashboard({ session }: { session: Session }) {
     </label>
   );
 
+  const featureField = (n: 1 | 2 | 3) => {
+    const textKey = `feature_${n}` as keyof Settings;
+    const iconKey = `icon_${n}` as keyof Settings;
+    const Preview = getFeatureIcon(s[iconKey]);
+    return (
+      <div className="space-y-1">
+        <span className="text-sm text-muted-foreground">Feature line {n}</span>
+        <div className="flex items-center gap-2">
+          <select
+            className={`${input} w-auto`}
+            value={s[iconKey] ?? "zap"}
+            onChange={(e) => setS({ ...s, [iconKey]: e.target.value })}
+            aria-label={`Icon for feature line ${n}`}
+          >
+            {FEATURE_ICONS.map(({ key, label }) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border bg-secondary">
+            <Preview className="h-5 w-5 text-primary" />
+          </span>
+          <input className={input} value={s[textKey] ?? ""} onChange={(e) => setS({ ...s, [textKey]: e.target.value })} />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6">
       <form onSubmit={save} className="space-y-4 rounded-3xl border bg-card p-6">
