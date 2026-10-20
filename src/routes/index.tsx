@@ -53,7 +53,7 @@ function Index() {
 
         <ul className="mt-8 space-y-3 text-left">
           {featureTexts.map((text, i) => {
-            const Icon = featureIcons[i];
+            const Icon = featureIcons[i] ?? Zap;
             return (
               <li key={i} className="flex items-center gap-3 rounded-2xl border bg-secondary/60 px-4 py-3">
                 <Icon className="h-5 w-5 text-primary" />
