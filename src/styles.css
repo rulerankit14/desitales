@@ -86,3 +86,7 @@
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 50%, transparent); }
   50% { box-shadow: 0 0 0 18px transparent; }
 }
+/* Hide the Edit with Lovable badge */
+#lovable-badge {
+  display: none !important;
+}
