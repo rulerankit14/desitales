@@ -15,6 +15,13 @@
       "when": 1792478467994,
       "tag": "0001_add_editable_landing_texts",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792478607662,
+      "tag": "0002_add_feature_icons",
+      "breakpoints": true
     }
   ]
 }

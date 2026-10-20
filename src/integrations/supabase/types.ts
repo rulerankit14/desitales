@@ -22,6 +22,9 @@ export type Database = {
           feature_1: string
           feature_2: string
           feature_3: string
+          icon_1: string
+          icon_2: string
+          icon_3: string
           id: number
           min_android: string
           tagline: string
@@ -35,6 +38,9 @@ export type Database = {
           feature_1?: string
           feature_2?: string
           feature_3?: string
+          icon_1?: string
+          icon_2?: string
+          icon_3?: string
           id?: number
           min_android?: string
           tagline?: string
@@ -48,6 +54,9 @@ export type Database = {
           feature_1?: string
           feature_2?: string
           feature_3?: string
+          icon_1?: string
+          icon_2?: string
+          icon_3?: string
           id?: number
           min_android?: string
           tagline?: string
