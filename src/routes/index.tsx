@@ -38,7 +38,7 @@ function Index() {
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
       <div className="w-full max-w-md rounded-3xl border bg-card/60 p-7 text-center shadow-glow backdrop-blur">
         <span className="inline-block rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold tracking-widest text-primary-foreground">
-          FREE VIDEO CALLS
+          {data?.badge_text ?? "FREE VIDEO CALLS"}
         </span>
         <h1 className="mt-6 text-5xl font-extrabold">
           {first} {rest.length > 0 && <span className="text-gradient">{rest.join(" ")}</span>}
@@ -52,12 +52,15 @@ function Index() {
         </div>
 
         <ul className="mt-8 space-y-3 text-left">
-          {features.map(({ icon: Icon, text }) => (
-            <li key={text} className="flex items-center gap-3 rounded-2xl border bg-secondary/60 px-4 py-3">
-              <Icon className="h-5 w-5 text-primary" />
-              <span>{text}</span>
-            </li>
-          ))}
+          {featureTexts.map((text, i) => {
+            const Icon = featureIcons[i];
+            return (
+              <li key={i} className="flex items-center gap-3 rounded-2xl border bg-secondary/60 px-4 py-3">
+                <Icon className="h-5 w-5 text-primary" />
+                <span>{text}</span>
+              </li>
+            );
+          })}
         </ul>
 
         <a
