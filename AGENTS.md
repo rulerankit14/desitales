@@ -9,4 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- App download settings live in one app_settings row; only owner/admin roles (user_roles table, is_staff()) may edit it or upload to the private apks bucket — RLS enforces this, the /admin page only gates UI.
+- Keep the original main-page settings in app_settings; named pages use landing_pages JSON settings and page_members assignments. Database RLS and can_manage_page enforce isolation; global owners manage all pages while page admins manage only assigned pages.
+- Keep named-page APKs under their slug folder in the private apks bucket, and scope visits and query caches by page. Legacy root APKs and visits retain existing staff permissions.
+- Use shared DownloadPage rendering for the main and dynamic public pages so their editable fields stay consistent. Assign pending page membership by verified sign-in email, never user-editable metadata.

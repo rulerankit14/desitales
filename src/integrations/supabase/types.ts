@@ -65,23 +65,81 @@ export type Database = {
         }
         Relationships: []
       }
+      landing_pages: {
+        Row: {
+          settings: Json
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          settings?: Json
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          settings?: Json
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      page_members: {
+        Row: {
+          email: string
+          id: string
+          page_slug: string
+          user_id: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          page_slug: string
+          user_id?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          page_slug?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_members_page_slug_fkey"
+            columns: ["page_slug"]
+            isOneToOne: false
+            referencedRelation: "landing_pages"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       page_visits: {
         Row: {
           id: number
+          page_slug: string | null
           path: string
           visited_at: string
         }
         Insert: {
           id?: never
+          page_slug?: string | null
           path?: string
           visited_at?: string
         }
         Update: {
           id?: never
+          page_slug?: string | null
           path?: string
           visited_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "page_visits_page_slug_fkey"
+            columns: ["page_slug"]
+            isOneToOne: false
+            referencedRelation: "landing_pages"
+            referencedColumns: ["slug"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -106,12 +164,24 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      assign_page_admin: {
+        Args: { _email: string; _slug: string }
+        Returns: boolean
+      }
+      can_manage_page: {
+        Args: { _slug: string; _user_id: string }
+        Returns: boolean
+      }
       grant_admin_by_email: { Args: { _email: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_page_member: {
+        Args: { _email: string; _user_id: string }
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
